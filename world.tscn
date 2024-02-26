@@ -1,7 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://c64fg36s0t6ri"]
+[gd_scene load_steps=20 format=3 uid="uid://c64fg36s0t6ri"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_tn7rm"]
 [ext_resource type="Material" uid="uid://dw71tkuysnlnn" path="res://assets/wall.tres" id="2_1vt37"]
+[ext_resource type="AudioStream" uid="uid://c5fxsyjk2qj46" path="res://assets/light-rain-109591.mp3" id="3_3cjha"]
+[ext_resource type="Script" path="res://Door.gd" id="3_lhsj0"]
+[ext_resource type="AudioStream" uid="uid://btsds7j6cv08u" path="res://assets/lock-falling.mp3" id="3_mqjw1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5y6tr"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -145,7 +148,7 @@ transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 
 shape = SubResource("ConcavePolygonShape3D_d507q")
 
 [node name="Wall7" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.89207, 1, -7.97965)
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 2.89207, 1, -7.97965)
 mesh = SubResource("PlaneMesh_8s1og")
 skeleton = NodePath("../..")
 
@@ -182,3 +185,19 @@ shape = SubResource("ConcavePolygonShape3D_mtwxf")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/Wall6/StaticBody3D"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_mtwxf")
+
+[node name="Door" type="Node" parent="."]
+script = ExtResource("3_lhsj0")
+
+[node name="Lock-falling" type="AudioStreamPlayer3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.79955, 0.19752, 3.59501)
+stream = ExtResource("3_mqjw1")
+
+[node name="Rain" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Rain"]
+stream = ExtResource("3_3cjha")
+volume_db = -10.0
+autoplay = true
+
+[node name="Button" type="Node" parent="."]

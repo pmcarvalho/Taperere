@@ -5,6 +5,7 @@ const SPEED = 5.0
 
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
+@onready var door := $"../Door"
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -16,6 +17,10 @@ func _unhandled_input(event):
 			neck.rotate_y(-event.relative.x*0.005)
 			camera.rotate_x(-event.relative.y*0.01)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+	if event is InputEventKey:
+		if(Input.is_action_just_pressed("interact")):
+			door.trigger()
+		
 
 func _physics_process(_delta):
 	# Get the input direction and handle the movement/deceleration.
